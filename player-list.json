@@ -1,0 +1,38 @@
+{
+    "MatthewStaffordDET9": {
+        "name": "Matthew Stafford",
+        "team": "DET",
+        "number": 9,
+        "dynasty": 3000
+    },
+    "MatthewStaffordLAR9": {
+        "name": "Matthew Stafford",
+        "team": "LAR",
+        "number": 9,
+        "dynasty": 3000
+    },
+    "MattRyanATL2": {
+        "name": "Matt Ryan",
+        "team": "ATL",
+        "number": 2,
+        "dynasty": 500
+    },
+    "MattPraterDET5": {
+        "name": "Matt Prater",
+        "team": "DET",
+        "number": 5,
+        "dynasty": 120
+    },
+    "KennyGolladayDET19": {
+        "name": "Kenny Golladay",
+        "team": "DET",
+        "number": 19,
+        "dynasty": 2000
+    },
+    "TrevorLawrenceJAX12": {
+        "name": "Trevor Lawrence",
+        "team": "JAX",
+        "number": 12,
+        "dynasty": 1000
+    }
+}
