@@ -122,40 +122,65 @@ const data = {
         let targetDiv = null
         if (team === 1) {
             team1Score += amount
-            targetDiv = document.getElementById("team1-score").innerHTML = "<p class='team-score'>" + team1Score + "</p>"
+            targetDiv = document.getElementById("team1-score").innerHTML = "<p class='team-score' id='your-score'>" + team1Score + "</p>"
         } else {
             team2Score += amount
-            targetDiv = document.getElementById("team2-score").innerHTML = "<p class='team-score'>" + team2Score + "</p>"
+            targetDiv = document.getElementById("team2-score").innerHTML = "<p class='team-score' id='their-score'>" + team2Score + "</p>"
         }
 
         let diff = Math.abs(team1Score - team2Score)
         if (team1Score === 0 || team2Score === 0) {
+            if (document.getElementById("your-score")) {
+                document.getElementById("your-score").setAttribute("style", "background-color: #f5f5f5;");
+            }
+            if (document.getElementById("their-score")) {
+                document.getElementById("their-score").setAttribute("style", "background-color: #f5f5f5;");
+            }
+            
+            
             document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>Let's get trading!</h4>"
             return
         }
+
+        // Light Green to Dark Green in Terms of how good trade is
+        // Light red to dark red in terms of how bad trade is 
         switch (true) {
             case diff < 100:
+                document.getElementById("your-score").setAttribute("style", "background-color: #d8ffe5;");
+                document.getElementById("their-score").setAttribute("style", "background-color: #d8ffe5;");
                 document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This is a fair trade!</h4>"
                 break;
             case diff < 500:
                 if (team1Score > team2Score) {
-                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is better for team 1</h4>"
+                    document.getElementById("your-score").setAttribute("style", "background-color: #a5ffc3;");
+                    document.getElementById("their-score").setAttribute("style", "background-color: #f2c9c5;");
+                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is better for you</h4>"
                 } else {
-                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is better for team 2</h4>"
+                    document.getElementById("your-score").setAttribute("style", "background-color: #f2c9c5;");
+                    document.getElementById("their-score").setAttribute("style", "background-color: #a5ffc3;");
+                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is better for them</h4>"
                 }
                 break;
             case diff < 1000:
                 if (team1Score > team2Score) {
-                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is much better for team 1</h4>"
+                    document.getElementById("your-score").setAttribute("style", "background-color: #61ff96;");
+                    document.getElementById("their-score").setAttribute("style", "background-color: #e6968d;");
+                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is much better for you</h4>"
                 } else {
-                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is much better for team 2</h4>"
+                    document.getElementById("your-score").setAttribute("style", "background-color: #e6968d;");
+                    document.getElementById("their-score").setAttribute("style", "background-color: #61ff96;");
+                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>This trade is much better for them</h4>"
                 }
                 break;
             default:
                 if (team1Score > team2Score) {
-                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>Team 1 is ripping team 2 off badly</h4>"
+                    document.getElementById("your-score").setAttribute("style", "background-color: #0cff5e;");
+                    document.getElementById("their-score").setAttribute("style", "background-color: #d3483a;");
+                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>You are ripping them off badly</h4>"
                 } else {
-                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>Team 2 is ripping team 1 off badly</h4>"
+                    document.getElementById("your-score").setAttribute("style", "background-color: #d3483a;");
+                    document.getElementById("their-score").setAttribute("style", "background-color: #0cff5e;");
+                    document.getElementById("messageTextContainer").innerHTML = "<h4 class='messageText'>They are ripping you off badly</h4>"
                 }
                 break;
         }
