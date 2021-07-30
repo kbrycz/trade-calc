@@ -1,9 +1,70 @@
-    
+const data = {
+    "MatthewStaffordDET9": {
+        "name": "Matthew Stafford",
+        "team": "DET",
+        "number": 9,
+        "dynasty": 3000,
+        "dynastyPPR": 2000,
+        "seasonal": 1000,
+        "seasonalPPR": 100
+    },
+    "MatthewStaffordLAR9": {
+        "name": "Matthew Stafford",
+        "team": "LAR",
+        "number": 9,
+        "dynasty": 3000,
+        "dynastyPPR": 2000,
+        "seasonal": 1000,
+        "seasonalPPR": 100
+    },
+    "MattRyanATL2": {
+        "name": "Matt Ryan",
+        "team": "ATL",
+        "number": 2,
+        "dynasty": 500,
+        "dynastyPPR": 2000,
+        "seasonal": 1000,
+        "seasonalPPR": 100
+    },
+    "MattPraterDET5": {
+        "name": "Matt Prater",
+        "team": "DET",
+        "number": 5,
+        "dynasty": 120,
+        "dynastyPPR": 2000,
+        "seasonal": 1000,
+        "seasonalPPR": 100
+    },
+    "KennyGolladayDET19": {
+        "name": "Kenny Golladay",
+        "team": "DET",
+        "number": 19,
+        "dynasty": 2000,
+        "dynastyPPR": 2000,
+        "seasonal": 1000,
+        "seasonalPPR": 100
+    },
+    "TrevorLawrenceJAX12": {
+        "name": "Trevor Lawrence",
+        "team": "JAX",
+        "number": 12,
+        "dynasty": 1000,
+        "dynastyPPR": 2000,
+        "seasonal": 1000,
+        "seasonalPPR": 100
+    }
+}
+
     // Variables
     var team1Score = 0
     var team2Score = 0
     var team1 = new Array()
     var team2 = new Array()
+    var league = 0
+
+    // Initialize Radio Values
+    updateRadioValue();
+
     // Initialize team scores
     updateTeamScore(1, 0)
     updateTeamScore(2, 0)
@@ -12,13 +73,34 @@
     updateTeam(1, null)
     updateTeam(2, null)
 
-    // Read in json and turn it into js obj
-    fetch("player-list.json")
-        .then(response => response.json())
-        .then(data => {
-            autocomplete(document.getElementById("team1input"), data, 1);
-            autocomplete(document.getElementById("team2input"), data, 2);
-    })
+    autocomplete(document.getElementById("team1input"), data, 1);
+    autocomplete(document.getElementById("team2input"), data, 2);
+
+    function updateRadioValue() {
+        if (document.querySelector('input[name="inlineRadioOptions"]')) {
+            document.querySelectorAll('input[name="inlineRadioOptions"]').forEach((elem) => {
+              elem.addEventListener("change", function(event) {
+                league = parseInt(event.target.value)
+                
+                // Update current team array and score
+                team1Score = 0
+                team2Score = 0
+
+                team1 = new Array()
+                team2 = new Array()
+
+                // Initialize team scores
+                updateTeamScore(1, 0)
+                updateTeamScore(2, 0)
+
+                // Initialize playerbox
+                updateTeam(1, null)
+                updateTeam(2, null)
+
+              });
+            });
+        }
+    }
 
     // Deletes player from current team list
     function deletePlayer(team, index) {
@@ -85,17 +167,50 @@
         let list = []
 
         if (team === 1) {
+
             // Get all team members
             for (index in team1) {
+                // Figure out what score to use
+                let playerScore = 0
+                switch(league) {
+                    case 1: 
+                        playerScore = team1[index].dynastyPPR
+                        break
+                    case 2:
+                        playerScore = team1[index].seasonal
+                        break
+                    case 3: 
+                        playerScore = team1[index].seasonalPPR
+                        break
+                    default:
+                        playerScore = team1[index].dynasty
+                        break
+                }
                 const deletePlayerStr = `deletePlayer(${team}, ${index})`
-                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team1[index].name + "</li><h5 class='playerScore'>" + team1[index].dynasty + "</h5></div>"
+                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team1[index].name + "</li><h5 class='playerScore'>" + playerScore + "</h5></div>"
                 list.push(element)
             }
         } else {
             // Get all team members
             for (index in team2) {
+                // Figure out what score to use
+                let playerScore = 0
+                switch(league) {
+                    case 1: 
+                        playerScore = team2[index].dynastyPPR
+                        break
+                    case 2:
+                        playerScore = team2[index].seasonal
+                        break
+                    case 3: 
+                        playerScore = team2[index].seasonalPPR
+                        break
+                    default:
+                        playerScore = team2[index].dynasty
+                        break
+                }
                 const deletePlayerStr = `deletePlayer(${team}, ${index})`
-                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team2[index].name + "</li><h5 class='playerScore'>" + team2[index].dynasty + "</h5></div>"
+                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team2[index].name + "</li><h5 class='playerScore'>" + playerScore + "</h5></div>"
                 list.push(element)
             }
         }
@@ -130,16 +245,48 @@
             
             // Get all team members
             for (index in team1) {
+                // Figure out what score to use
+                let playerScore = 0
+                switch(league) {
+                    case 1: 
+                        playerScore = team1[index].dynastyPPR
+                        break
+                    case 2:
+                        playerScore = team1[index].seasonal
+                        break
+                    case 3: 
+                        playerScore = team1[index].seasonalPPR
+                        break
+                    default:
+                        playerScore = team1[index].dynasty
+                        break
+                }
                 const deletePlayerStr = `deletePlayer(${team}, ${index})`
-                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team1[index].name + "</li><h5 class='playerScore'>" + team1[index].dynasty + "</h5></div>"
+                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team1[index].name + "</li><h5 class='playerScore'>" + playerScore + "</h5></div>"
                 list.push(element)
             }
         } else {
             team2.push(player)
             // Get all team members
             for (index in team2) {
+                // Figure out what score to use
+                let playerScore = 0
+                switch(league) {
+                    case 1: 
+                        playerScore = team2[index].dynastyPPR
+                        break
+                    case 2:
+                        playerScore = team2[index].seasonal
+                        break
+                    case 3: 
+                        playerScore = team2[index].seasonalPPR
+                        break
+                    default:
+                        playerScore = team2[index].dynasty
+                        break
+                }
                 const deletePlayerStr = `deletePlayer(${team}, ${index})`
-                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team2[index].name + "</li><h5 class='playerScore'>" + team2[index].dynasty + "</h5></div>"
+                const element = "<div class='playerRow'><button onclick='" + deletePlayerStr + "' name='delete' type='button' class='deletePlayerButton'>X</button><li class='playerNameItem'>" + team2[index].name + "</li><h5 class='playerScore'>" + playerScore + "</h5></div>"
                 list.push(element)
             }
         }
@@ -191,7 +338,24 @@
                     /*insert a input field that will hold the current array item's value:*/
                     b.innerHTML += "<input type='hidden' value='" + players[player].name + "'>";
 
-                    b.innerHTML += "<p class='player-info'>(" + players[player].team + "  ·  #" + players[player].number + "  ·  " + players[player].dynasty + ")</p>"
+                    let playerScore = 0
+                    switch(league) {
+                        case 1:
+                            playerScore = players[player].dynastyPPR
+                            break
+                        case 2:
+                            playerScore = players[player].seasonal
+                            break
+                        case 3: 
+                            playerScore = players[player].seasonalPPR
+                            break
+                        default:
+                            console.log(league)
+                            playerScore = players[player].dynasty
+                            break
+                    }
+
+                    b.innerHTML += "<p class='player-info'>(" + players[player].team + " #" + players[player].number + "  ·  " + playerScore + ")</p>"
 
                     /*execute a function when someone clicks on the item value (DIV element):*/
                     b.addEventListener("click", function(e) {
@@ -200,7 +364,7 @@
                         inp.value = ""
 
                         /* Update total score and player array*/
-                        updateTeamScore(team, players[player].dynasty)
+                        updateTeamScore(team, playerScore)
                         updateTeam(team, players[player])
 
                         /*close the list of autocompleted values,
