@@ -21,7 +21,7 @@
 }
 
 .headerRow {
-  background-color: #4d4d4d;
+  background-color: #383838;
 }
 .radioRow {
   margin-top: -20px;
@@ -38,6 +38,13 @@
   font-weight: 800;
   color: #fff;
   padding: 50px;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.messageText2 {
+  display: none;
 }
 
 .teamName {
@@ -59,7 +66,7 @@
 
 .team-score {
   margin: 20px auto;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   padding: 15px;
   width: 120px;
   font-size: 28px;
@@ -121,7 +128,7 @@ ul {
   font-size: 20px;
   font-weight: 500;
   flex: auto;
-  margin-left: 10px;
+  text-align: center;
 }
 
 .playerScore {
@@ -134,6 +141,8 @@ ul {
   margin-left: 10px;
   float: right;
 }
+
+
 
 /* CHECKBOX STYLING */
 
@@ -218,6 +227,10 @@ input[type="radio"]:active {
     color: #fff;
   }
 
+  .mobileMessage {
+    display: none;
+  }
+
   
   /*when navigating through the items using the arrow keys:*/
   .autocomplete-active {
@@ -286,7 +299,7 @@ input[type="radio"]:active {
       flex-direction: column;
     }
     .team:first-child {
-      margin-bottom: 50px;
+      margin-bottom: 35px;
     }
 
     .team-score {
@@ -307,8 +320,7 @@ input[type="radio"]:active {
     }
     .playerNameItem {
       font-size: 14px;
-      text-align: left;
-      margin-left: 10px;
+      text-align: center;
     }
     
     .playerScore {
@@ -333,5 +345,42 @@ input[type="radio"]:active {
       margin-right: 5%;
       margin-bottom: 15%;
     }
+
+    .mobileMessage {
+      margin: auto;
+      display: block;
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 35px;
+      text-align: center;
+      border-radius: 10px;
+      width: 95%;
+
+    }
+
+    .mobileMessageText {
+      padding: 12px;
+      padding-top: 15px;
+      font-weight: 800;
+      line-height: 35px;
+    }
+
+    .messageText2 {
+      display: block;
+      text-align: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 24px;
+      padding: 30px;
+      line-height: 40px;
+      text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+    }
+
+    .messageText {
+      display: none;
+    }
+  
 
   }
