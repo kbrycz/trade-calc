@@ -276,7 +276,7 @@ input[type="radio"]:active {
     }
     .playerNameItem {
       font-size: 14px;
-      text-align: left;
+      text-align: center;
       margin-left: 20px;
     }
     
@@ -341,8 +341,8 @@ input[type="radio"]:active {
 
     .calcForm {
       margin-top: 10%;
-      margin-left: 5%;
-      margin-right: 5%;
+      margin-left: 3%;
+      margin-right: 3%;
       margin-bottom: 15%;
     }
 
